@@ -21,12 +21,12 @@ RUN npm run build
 # -----------------------------
 # Stage 2 : Backend Laravel
 # -----------------------------
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 WORKDIR /var/www/html
 
 # Copier le frontend build dans le dossier public
-COPY --from=frontend /app/public/build ./public/build
+COPY --from=frontend /app/public ./public
 
 # Copier tout le backend Laravel
 COPY . .
