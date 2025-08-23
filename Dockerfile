@@ -1,5 +1,5 @@
-# Étape 1 : build du frontend
-FROM node:18-alpine AS frontend-build
+# Étape 1 : builder le front
+FROM node:18-bullseye AS frontend-build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -7,24 +7,28 @@ COPY resources/js ./resources/js
 COPY vite.config.ts ./
 RUN npm run build
 
-# Étape 2 : setup Laravel
-FROM php:8.2-fpm-alpine
+# Étape 2 : préparer le backend Laravel
+FROM php:8.2-fpm
 WORKDIR /var/www/html
 
 # Installer les extensions PHP nécessaires
-RUN docker-php-ext-install pdo pdo_mysql
+RUN apt-get update && apt-get install -y \
+    libonig-dev \
+    libzip-dev \
+    zip \
+    unzip \
+    git \
+    curl \
+    && docker-php-ext-install pdo pdo_mysql mbstring zip
 
-# Copier le projet
-COPY . .
-
-# Copier les assets buildés depuis l'étape 1
-COPY --from=frontend-build /app/dist ./public/dist
+# Copier le backend
+COPY --from=frontend-build /app /var/www/html
 
 # Installer composer et dépendances Laravel
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY composer.json composer.lock ./
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Exposer le port
+# Exposer le port 9000
 EXPOSE 9000
-
 CMD ["php-fpm"]
