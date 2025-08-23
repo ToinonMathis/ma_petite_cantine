@@ -5,28 +5,14 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
-import AppLogo from './AppLogo.vue';
+import { LayoutGrid } from 'lucide-vue-next';
 
 const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
-    },
+    { title: "Menu de la semaine", href: '/menu', icon: 'fa-utensils' }, // Font Awesome
+    { title: 'Dashboard', href: '/dashboard', icon: LayoutGrid },        // Lucide directement
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
 ];
 </script>
 
@@ -35,9 +21,9 @@ const footerNavItems: NavItem[] = [
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
+                    <SidebarMenuButton size="lg" as-child class="h-50 flex items-center justify-center">
                         <Link :href="route('dashboard')">
-                            <AppLogo />
+                            <img src="/images/logo-primary.png" alt="logo de ma petite cantine" style="max-height: 100%">
                         </Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
