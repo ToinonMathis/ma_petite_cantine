@@ -26,7 +26,7 @@ FROM php:8.2-fpm
 WORKDIR /var/www/html
 
 # Copier le frontend build dans le dossier public
-COPY --from=frontend /app/dist ./public
+COPY --from=frontend /app/public/build ./public/build
 
 # Copier tout le backend Laravel
 COPY . .
