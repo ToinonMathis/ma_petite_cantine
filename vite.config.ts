@@ -21,13 +21,6 @@ export default defineConfig({
             },
         }),
     ],
-    root: './resources/js',
-    base: '/build/',
-    build: {
-        outDir: path.resolve(__dirname, 'public/build'),
-        emptyOutDir: true,
-        manifest: true,
-    },
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './resources/js'),
