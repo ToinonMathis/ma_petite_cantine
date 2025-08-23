@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Models\Menu; // Si tu as un modèle Menu
+use App\Models\Menu;
+use Carbon\Carbon; // Si tu as un modèle Menu
 
 class MenuController extends Controller
 {

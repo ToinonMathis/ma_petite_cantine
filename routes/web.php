@@ -14,9 +14,7 @@ Route::get('menu', function () {
     return Inertia::render('Menu');
 })->middleware(['auth', 'verified'])->name('menu');
 
-
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
-
 
 Route::middleware(['auth', 'verified'])->get('/api/menus', [MenuController::class, 'index']);

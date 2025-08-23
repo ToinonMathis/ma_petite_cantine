@@ -57,5 +57,4 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
     Route::get('api/menus', [MenuController::class, 'index']);
 
-
 });
