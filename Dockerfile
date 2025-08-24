@@ -5,49 +5,42 @@ FROM node:20 AS frontend
 
 WORKDIR /app
 
-# Copier package.json et package-lock.json pour installer les dépendances
 COPY package*.json vite.config.ts tsconfig.json ./
 COPY resources ./resources
 
-# Installer les dépendances système utiles pour npm build
 RUN apt-get update && apt-get install -y build-essential
-
-# Installer les dépendances npm
 RUN npm install
-
-# Build frontend
 RUN npm run build
 
 # -----------------------------
-# Stage 2 : Backend Laravel
+# Stage 2 : Backend Laravel + Nginx
 # -----------------------------
-FROM php:8.3-fpm
+FROM laravelphp/php-fpm-nginx:8.3
 
 WORKDIR /var/www/html
 
-# Copier le frontend build dans le dossier public
+# Copier le frontend build dans public
 COPY --from=frontend /app/public ./public
 
 # Copier tout le backend Laravel
 COPY . .
 
 # Installer les extensions PHP nécessaires
-RUN apt-get update && apt-get install -y \
-    libzip-dev \
-    libpq-dev \
-    unzip \
-    git \
-    curl \
+RUN apt-get update && apt-get install -y libzip-dev libpq-dev unzip git curl \
     && docker-php-ext-install pdo_pgsql zip
-
 
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
-# Exposer le port PHP-FPM
-EXPOSE 9000
 
-# Commande par défaut
-CMD ["php-fpm"]
+# Nettoyer et migrer
+RUN php artisan config:clear \
+    && php artisan cache:clear \
+    && php artisan route:clear \
+    && php artisan view:clear \
+    && php artisan migrate --force
+
+# Exposer le port par défaut pour Nginx
+EXPOSE 80
+
+# L'image gère déjà php-fpm + Nginx, donc pas de CMD à ajouter
