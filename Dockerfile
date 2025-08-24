@@ -46,7 +46,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
-RUN php artisan migrate --force
 # Exposer le port PHP-FPM
 EXPOSE 9000
 
