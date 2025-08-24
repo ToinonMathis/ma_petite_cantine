@@ -46,13 +46,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
-# Exposer le port attendu par Railway
+# Exposer le port (informations, Railway utilise $PORT)
 EXPOSE 8080
 
-# Commande par défaut : clear cache, migrer puis servir Laravel
+# Commande par défaut
 CMD php artisan config:clear && \
     php artisan cache:clear && \
     php artisan route:clear && \
     php artisan view:clear && \
     php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=8080
+    php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
