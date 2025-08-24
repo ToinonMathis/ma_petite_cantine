@@ -37,16 +37,21 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    && docker-php-ext-install pdo_mysql zip
+    libpq-dev \
+    && docker-php-ext-install pdo_pgsql zip
 
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
-RUN php artisan migrate --force
+
+# Copier le script entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 # Exposer le port PHP-FPM
 EXPOSE 9000
 
-# Commande par défaut
-CMD ["php-fpm"]
+# Définir l’entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
