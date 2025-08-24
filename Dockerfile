@@ -5,42 +5,60 @@ FROM node:20 AS frontend
 
 WORKDIR /app
 
+# Copier package.json, package-lock.json, vite config et sources
 COPY package*.json vite.config.ts tsconfig.json ./
 COPY resources ./resources
 
+# Installer les dépendances système utiles
 RUN apt-get update && apt-get install -y build-essential
+
+# Installer les dépendances npm
 RUN npm install
+
+# Build frontend
 RUN npm run build
 
 # -----------------------------
 # Stage 2 : Backend Laravel + Nginx
 # -----------------------------
-FROM laravelphp/php-fpm-nginx:8.3
+FROM php:8.3-fpm AS php
 
 WORKDIR /var/www/html
 
-# Copier le frontend build dans public
+# Copier frontend build dans public
 COPY --from=frontend /app/public ./public
 
-# Copier tout le backend Laravel
+# Copier backend Laravel
 COPY . .
 
-# Installer les extensions PHP nécessaires
-RUN apt-get update && apt-get install -y libzip-dev libpq-dev unzip git curl \
+# Installer extensions PHP nécessaires
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    libpq-dev \
+    unzip \
+    git \
+    curl \
     && docker-php-ext-install pdo_pgsql zip
 
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Installer dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
-# Nettoyer et migrer
-RUN php artisan config:clear \
-    && php artisan cache:clear \
-    && php artisan route:clear \
-    && php artisan view:clear \
-    && php artisan migrate --force
+# -----------------------------
+# Stage 3 : Nginx
+# -----------------------------
+FROM nginx:alpine
 
-# Exposer le port par défaut pour Nginx
-EXPOSE 80
+# Copier config Nginx
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# L'image gère déjà php-fpm + Nginx, donc pas de CMD à ajouter
+# Copier l'application PHP
+COPY --from=php /var/www/html /var/www/html
+
+# Exposer le port Railway
+EXPOSE 8080
+
+# Commande par défaut
+CMD ["nginx", "-g", "daemon off;"]
