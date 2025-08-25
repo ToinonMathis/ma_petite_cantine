@@ -14,4 +14,4 @@ echo "🔹 Exécution des migrations..."
 php artisan migrate --force
 
 echo "🔹 Démarrage de PHP-FPM..."
-php-fpm
+php artisan serv
