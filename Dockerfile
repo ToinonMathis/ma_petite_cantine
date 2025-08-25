@@ -48,6 +48,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 # Exposer le port PHP-FPM
 EXPOSE 8080
-
+RUN CHMOD 777 ./entrypoint.sh
 # Commande par défaut
-ENTRYPOINT ./entrypoint.sh
+ENTRYPOINT ["sh", "./entrypoint.sh"]
