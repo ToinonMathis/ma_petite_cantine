@@ -50,4 +50,4 @@ RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 EXPOSE 8080
 
 # Commande par défaut
-CMD ["php artisan serv"]
+CMD ["php", "artisan serve"]
