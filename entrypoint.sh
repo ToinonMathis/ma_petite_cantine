@@ -14,4 +14,6 @@ echo "🔹 Exécution des migrations..."
 php artisan migrate --force
 
 echo "🔹 Démarrage de PHP-FPM..."
-php artisan serv
+PORT=${PORT:-8000}
+php artisan serve --host=0.0.0.0 --port=$PORT
+
