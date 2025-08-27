@@ -45,9 +45,8 @@ RUN apt-get update && apt-get install -y \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Installer les dépendances PHP
-RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+RUN composer install --no-dev --optimize-autoloader
 # Exposer le port PHP-FPM
 EXPOSE 8080
-RUN CHMOD 777 ./entrypoint.sh
 # Commande par défaut
 ENTRYPOINT ["sh", "./entrypoint.sh"]
