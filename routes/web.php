@@ -13,6 +13,9 @@ Route::get('dashboard', function () {
 Route::get('menu', function () {
     return Inertia::render('Menu');
 })->middleware(['auth', 'verified'])->name('menu');
+Route::get('recipe', function () {
+    return Inertia::render('Recipe');
+})->middleware(['auth', 'verified'])->name('recipe');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
