@@ -19,6 +19,7 @@ const { toggleSidebar } = useSidebar()
     variant="ghost"
     size="icon"
     :class="cn('h-7 w-7', props.class)"
+    class="text-primary"
     @click="toggleSidebar"
   >
     <PanelLeft />

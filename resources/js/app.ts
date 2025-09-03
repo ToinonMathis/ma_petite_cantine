@@ -1,7 +1,7 @@
 import { createApp, h } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUtensils, faCheese, faCake, faLeaf, faNewspaper, faKitchenSet } from '@fortawesome/free-solid-svg-icons';
+import { faUtensils, faCheese, faCake, faLeaf, faNewspaper, faKitchenSet, faClock, faStar } from '@fortawesome/free-solid-svg-icons';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from 'ziggy-js';
@@ -10,7 +10,7 @@ import '../css/app.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
-library.add(faUtensils, faCheese, faCake, faLeaf, faNewspaper, faKitchenSet);
+library.add(faUtensils, faCheese, faCake, faLeaf, faNewspaper, faKitchenSet, faClock, faStar);
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
