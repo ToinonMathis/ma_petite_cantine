@@ -3,6 +3,7 @@
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
+            <img src="/images/menu.jpg" alt="">
             <div class="flex flex-wrap justify-center gap-8">
                 <div
                     v-for="dayMenu in weekMenu"
