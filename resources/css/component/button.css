@@ -1,0 +1,10 @@
+.bg-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+.bg-primary:hover {
+    background-color: hsl(320, 33%, 25%); /* une version assombrie du #582C4D */
+}
+.custom-button {
+    cursor: pointer;
+}

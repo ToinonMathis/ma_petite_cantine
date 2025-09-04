@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/vue3';
 
 const mainNavItems: NavItem[] = [
     { title: "Menu de la semaine", href: '/menu', icon: 'fa-utensils' }, // Font Awesome
-    { title: "Les recettes d'Isa", href: '/recipe', icon: 'fa-kitchen-set' }, // Font Awesome
+    { title: "Les recettes d'Isa", href: '/recipes', icon: 'fa-kitchen-set' }, // Font Awesome
     { title: "Les petites nouvelles", href: '/news', icon: 'fa-newspaper' },
     //{ title: 'Dashboard', href: '/dashboard', icon: LayoutGrid },        // Lucide directement
 ];
