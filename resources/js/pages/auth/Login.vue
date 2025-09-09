@@ -62,19 +62,19 @@ defineProps<{
                 <div class="flex items-center justify-between">
                     <Label for="remember" class="flex items-center space-x-3">
                         <Checkbox id="remember" name="remember" :tabindex="3" />
-                        <span>Remember me</span>
+                        <span>Se souvenir de moi</span>
                     </Label>
                 </div>
 
                 <Button type="submit" class="w-full mt-4" :tabindex="4" :disabled="processing">
                     <LoaderCircle v-if="processing" class="w-4 h-4 animate-spin" />
-                    Log in
+                    Connexion
                 </Button>
             </div>
 
             <div class="text-sm text-center text-muted-foreground">
-                Don't have an account?
-                <TextLink :href="route('register')" :tabindex="5">Sign up</TextLink>
+                Vous n'avez pas de compte ?
+                <TextLink :href="route('register')" :tabindex="5">Inscription</TextLink>
             </div>
         </Form>
     </AuthBase>

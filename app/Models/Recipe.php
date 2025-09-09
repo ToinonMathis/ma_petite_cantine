@@ -24,4 +24,12 @@ class Recipe extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function steps()
+    {
+        return $this->hasMany(RecipeStep::class)->orderBy('step_number');
+    }
+    public function ingredients()
+    {
+        return $this->hasMany(RecipeIngredient::class);
+    }
 }

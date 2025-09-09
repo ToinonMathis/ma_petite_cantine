@@ -9,7 +9,7 @@ class RecipesController
 {
     public function getRecipes()
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::with('steps', 'ingredients')->get();
         return response()->json($recipes);
     }
 }

@@ -2,7 +2,7 @@
     <Head title="Recette" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex flex-row justify-center gap-4 gap-md-20 mb-5">
+        <div class="flex flex-row overflow-x-auto p-2 gap-3 mb-5">
             <Button
                 text-label="Toutes"
                 :theme="recipeType === 'all' ? 'primary' : 'primaryOutline'"
@@ -32,8 +32,9 @@
         <RecipeList
             :recipes="viewRecipes"
             @selectRecipe="selectRecipe"
+            v-if="!recipeSelected"
         />
-        <RecipeSelected v-if="recipeSelected" :recipe="recipeSelected"/>
+        <RecipeSelected v-if="recipeSelected" :recipe="recipeSelected" @return="recipeSelected = null"/>
     </AppLayout>
 </template>
 <script setup lang="ts">
