@@ -20,9 +20,17 @@ Route::get('recipes', function () {
 Route::get('news', function () {
     return Inertia::render('News', []);
 })->middleware(['auth', 'verified'])->name('news');
+Route::get('post-menu', function () {
+    return Inertia::render('PostMenu', []);
+})->middleware(['auth', 'verified'])->name('post-menu');
+Route::get('create-recipe', function () {
+    return Inertia::render('CreateRecipe', []);
+})->middleware(['auth', 'verified'])->name('create-recipe');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth', 'verified'])->get('/api/menus', [MenuController::class, 'index']);
 Route::middleware(['auth', 'verified'])->get('/api/recipes', [RecipesController::class, 'getRecipes']);
+Route::middleware(['auth', 'verified'])->post('/api/recipes', [RecipesController::class, 'store'])->name('recipes.store');
+

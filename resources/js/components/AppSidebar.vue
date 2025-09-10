@@ -12,6 +12,10 @@ const mainNavItems: NavItem[] = [
     { title: "Les petites nouvelles", href: '/news', icon: 'fa-newspaper' },
     //{ title: 'Dashboard', href: '/dashboard', icon: LayoutGrid },        // Lucide directement
 ];
+const adminNavItems: NavItem[] = [
+    { title: "Création de recette", href: '/create-recipe', icon: 'fa-pen-to-square' }, // Font Awesome
+    { title: "Post du menu de la semaine", href: '/post-menu', icon: 'fa-download' }, // Font Awesome
+];
 
 const footerNavItems: NavItem[] = [
 ];
@@ -33,6 +37,9 @@ const footerNavItems: NavItem[] = [
 
         <SidebarContent>
             <NavMain :items="mainNavItems" />
+        </SidebarContent>
+        <SidebarContent>
+            <NavMain :items="adminNavItems" />
         </SidebarContent>
 
         <SidebarFooter>
