@@ -2,7 +2,7 @@
     <Head title="Recette" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex flex-row overflow-x-auto p-2 gap-3 mb-5">
+        <div class="flex flex-row overflow-x-auto p-2 gap-3 mb-5" v-if="!recipeSelected">
             <Button
                 text-label="Toutes"
                 :theme="recipeType === 'all' ? 'primary' : 'primaryOutline'"
