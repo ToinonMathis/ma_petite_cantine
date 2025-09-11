@@ -3,7 +3,7 @@ import { api } from './axios';
 import {DayMenu} from "@/types/menu/dayMenu";
 
 export const api_menus = {
-    getMenus(): Promise<DayMenu> {
+    getMenus(): Promise<String> {
         return new Promise((resolve, reject) => {
             api.get('/menus')
                 .then(res => resolve(res.data))

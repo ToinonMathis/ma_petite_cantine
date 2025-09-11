@@ -1,8 +1,8 @@
 <template>
-    <div class="border rounded-2xl shadow-lg bg-white m-20">
+    <div class="border rounded-2xl shadow-lg bg-white">
         <div class="flex justify-between">
-            <div class="bg-primary rounded-tr-none rounded-bl-none rounded-[8px] h-10 w-10 flex items-center justify-center">
-                <font-awesome-icon icon="fa-solid fa-arrow-left" class="text-white cursor-pointer" @click="emits('return')"/>
+            <div class="bg-primary rounded-tr-none rounded-bl-none rounded-[8px] h-10 w-10 flex items-center justify-center cursor-pointer" @click="emits('return')">
+                <font-awesome-icon icon="fa-solid fa-arrow-left" class="text-white"/>
             </div>
             <div class="flex gap-10 p-4">
                 <div class="flex flex-col items-center">

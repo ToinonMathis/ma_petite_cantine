@@ -2,39 +2,46 @@
     <Head title="Recette" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex flex-row overflow-x-auto p-2 gap-3 mb-5" v-if="!recipeSelected">
-            <Button
-                text-label="Toutes"
-                :theme="recipeType === 'all' ? 'primary' : 'primaryOutline'"
-                @click="recipeType = 'all'"
-            />
-            <Button
-                text-label="Entrées"
-                :theme="recipeType === 'entrée' ? 'primary' : 'primaryOutline'"
-                @click="recipeType = 'entrée'"
-            />
-            <Button
-                text-label="Plats"
-                :theme="recipeType === 'plat' ? 'primary' : 'primaryOutline'"
-                @click="recipeType = 'plat'"
-            />
-            <Button
-                text-label="Desserts"
-                :theme="recipeType === 'dessert' ? 'primary' : 'primaryOutline'"
-                @click="recipeType = 'dessert'"
-            />
-            <Button
-                text-label="Favoris"
-                :theme="recipeType === 'favori' ? 'primary' : 'primaryOutline'"
-                @click="recipeType = 'favori'"
-            />
+        <div class="p-4 mb-5">
+            <div
+                class="flex flex-row overflow-x-auto overflow-y-hidden gap-3 max-w-full"
+                v-if="!recipeSelected"
+            >
+                <Button
+                    text-label="Toutes"
+                    :theme="recipeType === 'all' ? 'primary' : 'primaryOutline'"
+                    @click="recipeType = 'all'"
+                />
+                <Button
+                    text-label="Entrées"
+                    :theme="recipeType === 'entrée' ? 'primary' : 'primaryOutline'"
+                    @click="recipeType = 'entrée'"
+                />
+                <Button
+                    text-label="Plats"
+                    :theme="recipeType === 'plat' ? 'primary' : 'primaryOutline'"
+                    @click="recipeType = 'plat'"
+                />
+                <Button
+                    text-label="Desserts"
+                    :theme="recipeType === 'dessert' ? 'primary' : 'primaryOutline'"
+                    @click="recipeType = 'dessert'"
+                />
+                <Button
+                    text-label="Favoris"
+                    :theme="recipeType === 'favori' ? 'primary' : 'primaryOutline'"
+                    @click="recipeType = 'favori'"
+                />
+            </div>
         </div>
         <RecipeList
             :recipes="viewRecipes"
             @selectRecipe="selectRecipe"
             v-if="!recipeSelected"
         />
-        <RecipeSelected v-if="recipeSelected" :recipe="recipeSelected" @return="recipeSelected = null"/>
+        <div class="flex flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
+            <RecipeSelected v-if="recipeSelected" :recipe="recipeSelected" @return="recipeSelected = null"/>
+        </div>
     </AppLayout>
 </template>
 <script setup lang="ts">

@@ -1,63 +1,62 @@
 <template>
     <Head title="Recette" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="m-20">
-            <h1 class="text-center">Creation de recette</h1>
+        <div class="flex flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
+            <h1 class="text-center text-primary text-2xl font-semibold mb-10">Creation d'une recette</h1>
             <div class="border rounded-2xl shadow-lg bg-white p-4">
                 <h2 class="mb-5">Informations principales</h2>
                 <Input
                     label="Titre"
                     type="text"
                     v-model="recipe.title"
-                    placeholder="Ma tarte aux fraises"
-                />
+                    placeholder="Entrez le titre de votre recette"                />
                 <Input
                     label="Description"
                     type="text"
                     v-model="recipe.description"
-                    placeholder="Ma tarte aux fraises"
+                    placeholder="Décrivez votre recette"
                 />
                 <Input
                     label="Type"
                     type="select"
                     :options="recipeTypes"
                     v-model="recipe.type"
-                    placeholder="Ma tarte aux fraises"
+                    placeholder="Choisissez un type de recette"
                 />
                 <Input
                     label="Temps de préparation"
                     type="number"
                     v-model="recipe.preparation_time"
-                    placeholder="Ma tarte aux fraises"
+                    placeholder="Durée en minutes"
                 />
                 <Input
                     label="Difficulté"
                     type="select"
                     :options="difficulties"
                     v-model="recipe.difficulty"
-                    placeholder="Ma tarte aux fraises"
+                    placeholder="Choisissez la difficulté"
                 />
                 <Input
                     label="Image"
                     type="file"
                     v-model="recipe.image"
-                    placeholder="Ma tarte aux fraises"
+                    placeholder="Ajoutez une image"
                 />
             </div>
             <div class="border rounded-2xl shadow-lg bg-white p-4 mt-5 flex flex-col">
                 <h2 class="mb-5">Ingrédients</h2>
-                <div v-for="(ingredient, index) in recipe.ingredients" :key="index" class="flex gap-10">
+                <div v-for="(ingredient, index) in recipe.ingredients" :key="index" class="flex gap-2">
                     <Input
-                        label="Nom de l'ingrédient"
+                        label="Ingrédient"
                         type="text"
-                        placeholder="Ma tarte aux fraises"
+                        placeholder="Nom de l'ingrédient"
                         v-model="recipe.ingredients[index].label"
                         class="w-1/2"
                     />
                     <Input
                         label="Quantité"
                         type="text"
-                        placeholder="Ma tarte aux fraises"
+                        placeholder="Quantité (ex: 200g, 1 cuillère)"
                         v-model="recipe.ingredients[index].quantity"
                         class="w-1/2"
                     />
@@ -71,7 +70,7 @@
             </div>
             <div class="border rounded-2xl shadow-lg bg-white p-4 mt-5 flex flex-col">
                 <h2 class="mb-5">Étapes</h2>
-                <div v-for="(step, index) in recipe.steps" :key="index" class="flex gap-10">
+                <div v-for="(step, index) in recipe.steps" :key="index" class="flex gap-2">
                     <Input
                         label="Titre de l'étape"
                         type="text"
@@ -94,11 +93,10 @@
                     class="ml-auto mt-4"
                 />
             </div>
-            {{ recipe }}
-            <div class="flex gap-5 mt-5">
+            <div class="flex ml-auto gap-5 mt-5">
                 <Button
                     text-label="Vider les champs"
-                    theme="danger"
+                    theme="grayLight"
                     @click="deleteRecipe"
                 />
                 <Button

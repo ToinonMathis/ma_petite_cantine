@@ -5,8 +5,8 @@
     >
         <!-- Icône si on en a une -->
         <span v-if="iconLabel && !loading" class="material-icons">
-      {{ iconLabel }}
-    </span>
+          {{ iconLabel }}
+        </span>
 
         <!-- Loader si loading -->
         <LoaderCircle
@@ -22,7 +22,7 @@
 import { computed, defineProps } from 'vue'
 import { LoaderCircle } from 'lucide-vue-next' // icône de chargement par ex.
 
-type Theme = 'primary' | 'primaryOutline' | 'secondary' | 'danger' | 'outline'
+type Theme = 'primary' | 'primaryOutline' | 'grayLight' | 'secondary' | 'danger' | 'outline'
 
 interface Props {
     theme?: Theme
@@ -46,7 +46,8 @@ const classes = computed(() => {
     const variants: Record<Theme, string> = {
         primary: 'bg-primary text-white custom-button',
         primaryOutline:'border border-primary text-primary custom-button',
-        secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 custom-button',
+        grayLight: 'bg-gray-300 text-black hover:bg-gray-400 custom-button',
+        secondary: 'bg-secondary text-white hover:bg-secondary custom-button',
         danger: 'bg-red-600 text-white hover:bg-red-700 custom-button',
         outline: 'border border-gray-400 text-gray-700 hover:bg-gray-100 custom-button'
     }

@@ -3,8 +3,8 @@
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
-            <img src="/images/menu.jpg" alt="">
             <div class="flex flex-wrap justify-center gap-8">
+                <img :src="imageMenu" alt="Menu de la semaine">
                 <div
                     v-for="dayMenu in weekMenu"
                     :key="dayMenu.id"
@@ -56,11 +56,12 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 const days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
 const weekMenu: Ref<DayMenu | []> = ref([]);
+const imageMenu: Ref<string> = ref("");
 
 onMounted(async () => {
     api_menu.getMenus()
         .then(data => {
-            weekMenu.value = data;
+            imageMenu.value = data;
         })
         .catch(err => {
             console.error('Erreur lors de la récupération des menus :', err);
