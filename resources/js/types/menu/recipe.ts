@@ -32,6 +32,7 @@ export interface Recipe {
     image?: string | null;
     steps?: RecipeStep[];
     ingredients?: RecipeIngredient[];
+    favorite?: boolean;
     created_at?: string | Date;
     updated_at?: string | Date;
 }

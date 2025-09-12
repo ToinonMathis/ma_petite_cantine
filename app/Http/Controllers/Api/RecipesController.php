@@ -6,6 +6,7 @@ use App\Models\Recipe;
 use App\Models\RecipeIngredient;
 use App\Models\RecipeStep;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -13,17 +14,25 @@ class RecipesController
 {
     public function getRecipes()
     {
+        $user = auth()->user();
+
         $recipes = Recipe::with('steps', 'ingredients')->get();
 
-        $recipes->transform(function ($recipe) {
+        $favoriteIds = $user
+            ? $user->favoriteRecipes()->pluck('recipes.id')->toArray()
+            : [];
+
+        $recipes->transform(function ($recipe) use ($favoriteIds) {
+            $recipe->favorite = in_array($recipe->id, $favoriteIds);
             if ($recipe->image) {
                 $recipe->image = Storage::disk('r2')->temporaryUrl(
                     $recipe->image,
-                    now()->addMinutes(20) // URL valable 10 min
+                    now()->addMinutes(20)
                 );
             } else {
                 $recipe->image = null;
             }
+
             return $recipe;
         });
 
@@ -89,4 +98,36 @@ class RecipesController
 
         return response()->json(['message' => 'Recette créée avec succès', 'recipe' => $recipe]);
     }
+    public function addFavorite($recipeId) {
+
+        $user = auth()->user(); // ou auth()->user()
+
+        if (!$user) {
+            return response()->json(['message' => 'Utilisateur non authentifié'], 401);
+        }
+
+        $user->favoriteRecipes()->attach($recipeId);
+        return response()->json(['message' => 'Recette ajoutée aux favoris']);
+    }
+    public function removeFavorite($recipeId)
+    {
+        $user = auth()->user();
+
+        // On détache la recette des favoris de l'utilisateur
+        $user->favoriteRecipes()->detach($recipeId);
+
+        return response()->json([
+            'message' => 'Recette retirée des favoris avec succès',
+            'recipe_id' => $recipeId,
+        ]);
+    }
+
+    public function getFavorites()
+    {
+        $user = auth()->user();
+        $favorites = $user->favoriteRecipes()->get(); // renvoie les recettes favorites
+
+        return response()->json($favorites);
+    }
+
 }

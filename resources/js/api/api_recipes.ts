@@ -46,5 +46,11 @@ export const api_recipes = {
             console.error('Erreur lors de l\'envoi', error);
             throw error;
         }
+    },
+    addFavoriteRecipe(id) {
+        return api.post('/recipes/favorite/' + id).then(res => res.data);
+    },
+    removeFavoriteRecipe(id) {
+        return api.delete('/recipes/favorite/' + id).then(res => res.data);
     }
 };

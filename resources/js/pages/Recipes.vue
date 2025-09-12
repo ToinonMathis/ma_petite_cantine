@@ -37,6 +37,8 @@
         <RecipeList
             :recipes="viewRecipes"
             @selectRecipe="selectRecipe"
+            @oldFav="removeFavorite"
+            @newFav="addFavorite"
             v-if="!recipeSelected"
         />
         <div class="flex flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
@@ -75,7 +77,7 @@ const viewRecipes: Ref<Recipe[]> = computed(() =>{
     } else if(recipeType.value === 'dessert') {
         return recipes.value.filter((recipe: Recipe) => recipe.type === "dessert");
     } else if(recipeType.value === 'favori') {
-        return recipes.value
+        return recipes.value.filter((recipe: Recipe) => recipe.favorite === true);
     }
 });
 onMounted(async () => {
@@ -92,5 +94,17 @@ onMounted(async () => {
 function selectRecipe(id) {
     const found = recipes.value.find((recipe: Recipe) => recipe.id === id);
     recipeSelected.value = found ?? null;
+}
+function addFavorite(id) {
+    let recipeFav =recipes.value.find(recipe => recipe.id === id);
+    if(recipeFav) {
+        recipeFav.favorite = true;
+    }
+}
+function removeFavorite(id) {
+    let recipeFav = recipes.value.find(recipe => recipe.id === id);
+    if (recipeFav) {
+        recipeFav.favorite = false;
+    }
 }
 </script>

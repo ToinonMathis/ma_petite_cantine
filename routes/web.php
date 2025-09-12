@@ -31,6 +31,20 @@ require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth', 'verified'])->get('/api/menus', [MenuController::class, 'index']);
+
 Route::middleware(['auth', 'verified'])->get('/api/recipes', [RecipesController::class, 'getRecipes']);
 Route::middleware(['auth', 'verified'])->post('/api/recipes', [RecipesController::class, 'store'])->name('recipes.store');
+
+Route::middleware(['auth', 'verified'])
+    ->post('/api/recipes/favorite/{id}', [RecipesController::class, 'addFavorite'])
+    ->name('recipes.favorite');
+Route::middleware(['auth', 'verified'])
+    ->delete('/api/recipes/favorite/{id}', [RecipesController::class, 'removeFavorite'])
+    ->name('recipes.unfavorite');
+Route::middleware(['auth', 'verified'])
+    ->get('/api/recipes/favorites', [RecipesController::class, 'getFavorites'])
+    ->name('recipes.favorites');
+
+
+
 

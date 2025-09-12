@@ -5,6 +5,8 @@
                 <div class="p-2 w-1/1 sm:w-1/2 md:w-1/3 lg:w-1/4" @click="selectRecipe(recipe.id)">
                     <CardRecipe
                         :recipe="recipe"
+                        @newFav="addFav"
+                        @oldFav="removeFav"
                     />
                 </div>
             </template>
@@ -23,12 +25,18 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
     recipes: () => [] as Recipe[],
 });
-const emits = defineEmits( ['selectRecipe'])
+const emits = defineEmits( ['selectRecipe', 'newFav', 'oldFav'])
 
 const viewRecipes = computed(() => props.recipes);
 
-function selectRecipe(id: number) {
+function selectRecipe(id: number): void {
     emits('selectRecipe', id);
+}
+function addFav(id: number): void {
+    emits('newFav', id);
+}
+function removeFav(id: number): void {
+    emits('oldFav', id);
 }
 </script>
 
