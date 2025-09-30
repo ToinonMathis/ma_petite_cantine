@@ -23,6 +23,9 @@ Route::get('news', function () {
 Route::get('post-menu', function () {
     return Inertia::render('PostMenu', []);
 })->middleware(['auth', 'verified'])->name('post-menu');
+Route::get('post-create', function () {
+    return Inertia::render('PostCreate', []);
+})->middleware(['auth', 'verified'])->name('post-create');
 Route::get('create-recipe', function () {
     return Inertia::render('CreateRecipe', []);
 })->middleware(['auth', 'verified'])->name('create-recipe');

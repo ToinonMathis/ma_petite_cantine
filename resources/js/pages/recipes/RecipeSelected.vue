@@ -45,10 +45,12 @@
             <p>{{ step.description }}</p>
         </div>
     </div>
+    <Comments :recipeId="props.recipe.id"/>
 </template>
 <script setup lang="ts">
 import {Difficulty, Recipe} from "@/types/menu/recipe";
 import {defineProps, withDefaults} from "vue";
+import Comments from "@/pages/recipes/CommentsOverView.vue";
 
 interface Props {
     recipe?: Recipe;

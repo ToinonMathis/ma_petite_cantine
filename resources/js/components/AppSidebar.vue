@@ -7,14 +7,14 @@ import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 
 const mainNavItems: NavItem[] = [
-    { title: "Menu de la semaine", href: '/menu', icon: 'fa-utensils' }, // Font Awesome
-    { title: "Les recettes d'Isa", href: '/recipes', icon: 'fa-kitchen-set' }, // Font Awesome
+    { title: "Menu de la semaine", href: '/menu', icon: 'fa-utensils' },
+    { title: "Les recettes d'Isa", href: '/recipes', icon: 'fa-kitchen-set' },
     { title: "Les petites nouvelles", href: '/news', icon: 'fa-newspaper' },
-    //{ title: 'Dashboard', href: '/dashboard', icon: LayoutGrid },        // Lucide directement
 ];
 const adminNavItems: NavItem[] = [
-    { title: "Création de recette", href: '/create-recipe', icon: 'fa-pen-to-square' }, // Font Awesome
-    { title: "Post du menu de la semaine", href: '/post-menu', icon: 'fa-download' }, // Font Awesome
+    { title: "Création de recette", href: '/create-recipe', icon: 'fa-pen-to-square' },
+    { title: "Post du menu de la semaine", href: '/post-menu', icon: 'fa-download' },
+    { title: "Nouveau Post", href: '/post-create', icon: 'fa-images' },
 ];
 
 const footerNavItems: NavItem[] = [

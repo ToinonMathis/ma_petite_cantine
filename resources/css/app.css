@@ -90,7 +90,7 @@
 :root {
     --primary: #582C4D;
     --primary-foreground: hsl(0 0% 98%);
-    --secondary: #ECE2D0;
+    --secondary: rgb(247, 236, 220);
     --secondary-foreground: var(--primary);
     --muted: #A26769;
     --muted-foreground: hsl(0 0% 45.1%);
@@ -133,7 +133,7 @@
     --popover-foreground: hsl(0 0% 98%);
     --primary: #582C4D;
     --primary-foreground: hsl(0 0% 9%);
-    --secondary: #ECE2D0;
+    --secondary: rgb(247, 236, 220);
     --secondary-foreground: hsl(0 0% 98%);
     --muted: hsl(0 0% 16.08%);
     --muted-foreground: hsl(0 0% 63.9%);

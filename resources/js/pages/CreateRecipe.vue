@@ -2,9 +2,9 @@
     <Head title="Recette" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
-            <h1 class="text-center text-primary text-2xl font-semibold mb-10">Creation d'une recette</h1>
+            <h1 class="text-center text-primary text-2xl font-bold mb-10">Creation d'une recette</h1>
             <div class="border rounded-2xl shadow-lg bg-white p-4">
-                <h2 class="mb-5">Informations principales</h2>
+                <h2 class="mb-5 text-primary font-semibold">Informations principales</h2>
                 <Input
                     label="Titre"
                     type="text"
@@ -16,26 +16,28 @@
                     v-model="recipe.description"
                     placeholder="Décrivez votre recette"
                 />
-                <Input
-                    label="Type"
-                    type="select"
-                    :options="recipeTypes"
-                    v-model="recipe.type"
-                    placeholder="Choisissez un type de recette"
-                />
-                <Input
-                    label="Temps de préparation"
-                    type="number"
-                    v-model="recipe.preparation_time"
-                    placeholder="Durée en minutes"
-                />
-                <Input
-                    label="Difficulté"
-                    type="select"
-                    :options="difficulties"
-                    v-model="recipe.difficulty"
-                    placeholder="Choisissez la difficulté"
-                />
+                <div class="flex gap-5">
+                    <Input
+                        label="Type"
+                        type="select"
+                        :options="recipeTypes"
+                        v-model="recipe.type"
+                        placeholder="Choisissez un type de recette"
+                    />
+                    <Input
+                        label="Temps de préparation"
+                        type="number"
+                        v-model="recipe.preparation_time"
+                        placeholder="Durée en minutes"
+                    />
+                    <Input
+                        label="Difficulté"
+                        type="select"
+                        :options="difficulties"
+                        v-model="recipe.difficulty"
+                        placeholder="Choisissez la difficulté"
+                    />
+                </div>
                 <Input
                     label="Image"
                     type="file"
@@ -44,7 +46,7 @@
                 />
             </div>
             <div class="border rounded-2xl shadow-lg bg-white p-4 mt-5 flex flex-col">
-                <h2 class="mb-5">Ingrédients</h2>
+                <h2 class="mb-5 text-primary font-semibold">Ingrédients</h2>
                 <div v-for="(ingredient, index) in recipe.ingredients" :key="index" class="flex gap-2">
                     <Input
                         label="Ingrédient"
@@ -69,7 +71,7 @@
                 />
             </div>
             <div class="border rounded-2xl shadow-lg bg-white p-4 mt-5 flex flex-col">
-                <h2 class="mb-5">Étapes</h2>
+                <h2 class="mb-5 text-primary font-semibold">Étapes</h2>
                 <div v-for="(step, index) in recipe.steps" :key="index" class="flex gap-2">
                     <Input
                         label="Titre de l'étape"
