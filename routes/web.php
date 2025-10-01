@@ -54,7 +54,7 @@ Route::middleware(['auth', 'verified'])
     ->get('/api/posts', [PostController::class, 'getPosts'])
     ->name('recipes.favorites');
 Route::middleware(['auth', 'verified'])
-    ->post('api/posts', [PostController::class, 'store'])
+    ->post('api/post', [PostController::class, 'store'])
     ->name('api.posts.store');
 
 

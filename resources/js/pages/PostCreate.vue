@@ -36,7 +36,7 @@ import Input from "@/components/_custom/Input.vue";
 import Button from "@/components/_custom/Button.vue";
 import {ref, Ref} from "vue";
 import {CreatePost} from "@/types/post";
-import axios from "axios";
+import {api_posts} from "@/api/api_posts";
 
 const post: Ref<CreatePost> = ref({
     title: '',
@@ -44,14 +44,7 @@ const post: Ref<CreatePost> = ref({
     image: null,
 });
 
-function onFileChange(event: Event) {
-    const file = (event.target as HTMLInputElement)?.files?.[0];
-    if (file) {
-        post.value.image = file;
-    }
-}
-
-const submitPost = async () => {
+function submitPost() {
     try {
         const formData = new FormData();
         formData.append("title", post.value.title);
@@ -59,18 +52,11 @@ const submitPost = async () => {
         if (post.value.image instanceof File) {
             formData.append("image", post.value.image);
         }
-
-        const response = await axios.post("/api/posts", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });
-
-        console.log("✅ Post créé :", response.data);
+        api_posts.post(formData)
     } catch (error) {
-        console.error("❌ Erreur création post :", error);
+        console.error("Erreur création post :", error);
     }
-};
+}
 </script>
 <style scoped>
 
