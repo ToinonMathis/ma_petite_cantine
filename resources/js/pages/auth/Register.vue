@@ -22,25 +22,25 @@ import { LoaderCircle } from 'lucide-vue-next';
         >
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="name">Name</Label>
+                    <Label for="name">Nom</Label>
                     <Input id="name" type="text" required autofocus :tabindex="1" autocomplete="name" name="name" placeholder="Full name" />
                     <InputError :message="errors.name" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
+                    <Label for="email">Adresse mail</Label>
                     <Input id="email" type="email" required :tabindex="2" autocomplete="email" name="email" placeholder="email@example.com" />
                     <InputError :message="errors.email" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password">Password</Label>
+                    <Label for="password">Mot de passe</Label>
                     <Input id="password" type="password" required :tabindex="3" autocomplete="new-password" name="password" placeholder="Password" />
                     <InputError :message="errors.password" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password_confirmation">Confirm password</Label>
+                    <Label for="password_confirmation">Confirmation du mot de passe</Label>
                     <Input
                         id="password_confirmation"
                         type="password"
@@ -55,13 +55,13 @@ import { LoaderCircle } from 'lucide-vue-next';
 
                 <Button type="submit" class="w-full mt-2" tabindex="5" :disabled="processing">
                     <LoaderCircle v-if="processing" class="w-4 h-4 animate-spin" />
-                    Create account
+                    création du compte
                 </Button>
             </div>
 
             <div class="text-sm text-center text-muted-foreground">
-                Already have an account?
-                <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
+                Vous avez déjà un compte ?
+                <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Connexion</TextLink>
             </div>
         </Form>
     </AuthBase>
