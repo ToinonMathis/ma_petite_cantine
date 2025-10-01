@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -18,6 +19,7 @@ class Post extends Model
         'image',
         'user_id',
     ];
+    protected $appends = ['image_url'];
 
     /**
      * Relation : un post appartient à un utilisateur.
@@ -41,5 +43,17 @@ class Post extends Model
     public function likes()
     {
         return $this->hasMany(LikePost::class);
+    }
+
+    public function getImageUrlAttribute(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+
+        return Storage::disk('r2')->temporaryUrl(
+            $this->image,
+            now()->addMinutes(20)
+        );
     }
 }

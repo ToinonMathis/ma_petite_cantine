@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\RecipesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -46,6 +47,11 @@ Route::middleware(['auth', 'verified'])
     ->name('recipes.unfavorite');
 Route::middleware(['auth', 'verified'])
     ->get('/api/recipes/favorites', [RecipesController::class, 'getFavorites'])
+    ->name('recipes.favorites');
+
+//Post
+Route::middleware(['auth', 'verified'])
+    ->get('/api/posts', [PostController::class, 'getPosts'])
     ->name('recipes.favorites');
 
 

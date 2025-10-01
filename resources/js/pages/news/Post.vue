@@ -1,31 +1,53 @@
 <template>
-    <div class="rounded-2xl border bg-white shadow-lg post">
-        <div class="p-2">
-            <p class="text-primary">Isa</p>
+    <div class="rounded-2xl border bg-white shadow-lg post" v-if="props.post">
+        <!-- Header -->
+        <div class="p-2 flex items-center gap-2">
+            <div class="rounded-full w-7 h-7 bg-primary flex items-center justify-center">
+                <font-awesome-icon :icon="['fas','user']" class="text-white text-sm" />
+            </div>
+            <p class="text-primary font-medium text-sm">{{ props.post.user.name }}</p>
         </div>
+
+        <!-- Image du post -->
         <img
-            src="https://www.instantprint.co.uk/umbraco-media/12420/social-media-image-sizes-for-twitterx-2024.png"
-            alt=""
-            class="image-post"
+            :src="post.image_url"
+            alt="Post Image"
+            class="image-post w-full"
         />
-        <i class="fa-solid fa-heart"></i>
-        <div class="flex gap-1 p-3">
-            <font-awesome-icon :icon="['far', 'heart']" size="lg" />
-            <font-awesome-icon :icon="['far', 'comment']" size="lg" />
-            <font-awesome-icon :icon="['far', 'paper-plane']" size="lg" />
+
+        <!-- Actions -->
+        <div class="flex gap-3 p-3 text-xl">
+            <font-awesome-icon :icon="['far', 'heart']" />
+            <font-awesome-icon :icon="['far', 'comment']" />
+            <font-awesome-icon :icon="['far', 'paper-plane']" />
         </div>
-        <div class="flex flex-col gap-1 p-3">
-            <p>Petite description</p>
-            <p>Afficher les commentaires</p>
-            <p>Ajouter un commentaire...</p>
+
+        <!-- Description & commentaires -->
+        <div class="flex flex-col gap-1 p-3 text-sm text-gray-700">
+            <p>{{ props.post.content }}</p>
+
+            <!-- Affichage des commentaires -->
+            <div v-if="props.post.comments.length">
+                <p v-for="comment in props.post.comments" :key="comment.id" class="text-gray-600">
+                    <span class="font-medium">{{ comment.user.name }}:</span> {{ comment.content }}
+                </p>
+            </div>
+
+            <!-- Ajout d'un champ commentaire -->
+            <p class="text-gray-400">Ajouter un commentaire...</p>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    name: "Post"
-}
+<script lang="ts" setup>
+import {computed, defineProps} from 'vue';
+import {Post} from "@/types/post";
+const props = defineProps<{ post: Post }>();
+
+const post = computed(() => {
+    return props.post;
+})
+
 </script>
 
 <style scoped>
