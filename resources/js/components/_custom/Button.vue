@@ -22,7 +22,7 @@
 import { computed, defineProps } from 'vue'
 import { LoaderCircle } from 'lucide-vue-next' // icône de chargement par ex.
 
-type Theme = 'primary' | 'primaryOutline' | 'grayLight' | 'secondary' | 'danger' | 'outline'
+type Theme = 'primary' | 'primaryLight' | 'primaryOutline' | 'grayLight' | 'light' | 'secondary' | 'danger' | 'outline'
 
 interface Props {
     theme?: Theme
@@ -45,8 +45,10 @@ const classes = computed(() => {
     const base = 'inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium transition disabled:opacity-50 disabled:cursor-not-allowed'
     const variants: Record<Theme, string> = {
         primary: 'bg-primary text-white custom-button',
+        primaryLight: 'bg-white text-primary hover:bg-primary custom-button',
         primaryOutline:'border border-primary text-primary custom-button',
         grayLight: 'bg-gray-300 text-black hover:bg-gray-400 custom-button',
+        light: 'bg-white text-black hover:bg-gray-400 custom-button',
         secondary: 'bg-secondary text-white hover:bg-secondary custom-button',
         danger: 'bg-red-600 text-white hover:bg-red-700 custom-button',
         outline: 'border border-gray-400 text-gray-700 hover:bg-gray-100 custom-button'

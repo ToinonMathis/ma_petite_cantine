@@ -24,7 +24,7 @@
 
         <!-- Description & commentaires -->
         <div class="flex flex-col gap-1 p-3 text-sm text-gray-700">
-            <p>{{ props.post.content }}</p>
+            <p><b class="text-primary">{{ props.post.title }}</b> - {{ props.post.content }}</p>
 
             <!-- Affichage des commentaires -->
             <div v-if="props.post.comments.length">

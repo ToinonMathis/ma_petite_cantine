@@ -11,6 +11,12 @@ export interface Post {
     likes: any[];
 }
 
+export interface CreatePost {
+    title: string;
+    content: string;
+    image: File | null;
+}
+
 interface Comment {
     id: number;
     content: string;
