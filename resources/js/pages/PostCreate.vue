@@ -26,7 +26,16 @@
                     text-label="Enregistrer"
                     @click="submitPost"
                 />
+                <Button
+                    text-label="voir la modal"
+                    @click="showModal = true"
+                />
             </div>
+            <Modal id="Test" title="test" v-model="showModal" closable="true">
+                <template #body>
+                    <p>TEst</p>
+                </template>
+            </Modal>
         </div>
     </AppLayout>
 </template>
@@ -37,12 +46,15 @@ import Button from "@/components/_custom/Button.vue";
 import {ref, Ref} from "vue";
 import {CreatePost} from "@/types/post";
 import {api_posts} from "@/api/api_posts";
+import Modal from '@/components/_custom/Modal.vue';
 
 const post: Ref<CreatePost> = ref({
     title: '',
     content: '',
     image: null,
 });
+const showModal = ref(false);
+
 
 function submitPost() {
     try {

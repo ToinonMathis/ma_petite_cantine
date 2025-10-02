@@ -1,0 +1,138 @@
+.ciss-modal {
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    height: 100dvh;
+    padding: 20px 0;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    background: rgba(33, 33, 33, 0.9);
+    z-index: 100;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.ciss-modal .modal-header,
+.ciss-modal .modal-actions {
+    height: 70px;
+}
+
+.ciss-modal .modal-header {
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ciss-modal .modal-body {
+    padding: 0 20px;
+}
+
+.ciss-modal .modal-title {
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.ciss-modal .modal-actions {
+    display: flex;
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ciss-modal .separateur {
+    width: 100%;
+    height: 1px;
+    background-color: var(--gray-200);
+}
+
+.ciss-modal .modal-header-custom {
+    height: 70px;
+    padding: 0 20px;
+}
+
+.ciss-modal .modal-close {
+    cursor: pointer;
+}
+
+.ciss-modal.animate-in {
+    opacity: 1;
+}
+
+.ciss-modal.animate-in .ciss-modal-bloc {
+    scale: 1;
+}
+
+.ciss-modal-bloc {
+    max-height: calc(100dvh - 40px);
+    border-radius: 20px;
+    background: white;
+    transition: all 0.3s ease-in-out;
+    scale: 0;
+}
+
+.ciss-modal-bloc.tiny {
+    width: 576px;
+}
+
+.ciss-modal-bloc.medium {
+    width: 992px;
+}
+
+.ciss-modal-bloc.large {
+    width: 1400px;
+}
+
+.ciss-modal-bloc.fullscreen {
+    width: 100vw;
+}
+
+.ciss-modal.align-flex-start {
+    align-items: flex-start;
+}
+
+.ciss-modal.align-flex-center {
+    align-items: center;
+}
+
+.ciss-modal.align-flex-end {
+    align-items: flex-end;
+}
+
+/* Petits ajustements pour les écrans de différentes tailles */
+@media (max-width: 1400px) {
+    .ciss-modal.large {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .ciss-modal.medium {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .ciss-modal {
+        height: 100dvh;
+        padding: 0;
+    }
+
+    .ciss-modal-bloc {
+        height: 100%;
+        max-height: 100%;
+    }
+
+    .ciss-modal .modal-body {
+        height: calc(100% - 140px);
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .ciss-modal.tiny {
+        width: 100%;
+    }
+}
