@@ -8,7 +8,7 @@ export interface Post {
     image_url: string;
     user: User;
     comments: Comment[];
-    likes: any[];
+    user_has_liked: boolean;
 }
 
 export interface CreatePost {

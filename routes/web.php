@@ -53,10 +53,6 @@ Route::middleware(['auth', 'verified'])
 Route::middleware(['auth', 'verified'])
     ->get('/api/posts', [PostController::class, 'getPosts'])
     ->name('recipes.favorites');
-Route::middleware(['auth', 'verified'])
-    ->post('api/post', [PostController::class, 'store'])
-    ->name('api.posts.store');
-
-
-
-
+Route::middleware(['auth', 'verified'])->post('api/post', [PostController::class, 'store'])->name('api.posts.store');
+Route::middleware(['auth', 'verified'])->post('/api/post/like', [PostController::class, 'like'])->name('api.posts.like');
+Route::middleware(['auth', 'verified'])->delete('/api/post/{id}/unlike', [PostController::class, 'unlike'])->name('api.posts.unlike');

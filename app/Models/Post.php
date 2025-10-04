@@ -56,4 +56,10 @@ class Post extends Model
             now()->addMinutes(20)
         );
     }
+
+    public function userLike()
+    {
+        return $this->hasOne(LikePost::class)->where('user_id', auth()->id());
+    }
+
 }

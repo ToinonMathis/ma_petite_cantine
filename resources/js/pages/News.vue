@@ -5,7 +5,10 @@
         <div class="flex flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4" v-if="posts.length > 0">
             <h1 class="mb-10 text-center text-2xl font-bold text-primary">Posts</h1>
             <div class="flex flex-col items-center gap-10" v-for="post in posts">
-                <PostComponent :post="post" />
+                <PostComponent
+                    :post="post"
+                    @like="like"
+                />
             </div>
         </div>
     </AppLayout>
@@ -32,6 +35,14 @@ onMounted(() => {
         posts.value = response;
     });
 });
+function like(idPost) {
+    const post = posts.value.find(p => p.id === idPost);
+    if (!post) return;
+    console.log(posts.value)
+    // Basculer l'état 'user_has_liked'
+    post.user_has_liked = !post.user_has_liked;
+    console.log(posts.value)
+}
 </script>
 <style scoped>
 .post {

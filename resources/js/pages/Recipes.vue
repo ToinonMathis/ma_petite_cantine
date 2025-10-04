@@ -96,13 +96,13 @@ function selectRecipe(id) {
     recipeSelected.value = found ?? null;
 }
 function addFavorite(id) {
-    let recipeFav =recipes.value.find(recipe => recipe.id === id);
+    const recipeFav =recipes.value.find(recipe => recipe.id === id);
     if(recipeFav) {
         recipeFav.favorite = true;
     }
 }
 function removeFavorite(id) {
-    let recipeFav = recipes.value.find(recipe => recipe.id === id);
+    const recipeFav = recipes.value.find(recipe => recipe.id === id);
     if (recipeFav) {
         recipeFav.favorite = false;
     }

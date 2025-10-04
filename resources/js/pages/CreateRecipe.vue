@@ -98,7 +98,7 @@
             <div class="flex ml-auto gap-5 mt-5">
                 <Button
                     text-label="Vider les champs"
-                    theme="grayLight"
+                    theme="primaryLight"
                     @click="deleteRecipe"
                 />
                 <Button

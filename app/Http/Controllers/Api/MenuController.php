@@ -25,15 +25,6 @@ class MenuController extends Controller
         } else {
             $menus->image = null;
         }
-
-        // Lundi et vendredi de la semaine courante
-        //$startOfWeek = $today->copy()->startOfWeek(Carbon::MONDAY); // lundi
-        //$endOfWeek = $startOfWeek->copy()->addDays(4); // vendredi
-
-        //$menus = Menu::whereBetween('menu_date', [$startOfWeek, $endOfWeek])
-        //    ->orderBy('menu_date', 'asc')
-        //    ->get();
-
         return response()->json($menus->image);
     }
 }

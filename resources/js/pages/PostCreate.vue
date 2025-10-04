@@ -4,8 +4,6 @@
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
             <h1 class="text-center text-primary text-2xl font-bold mb-10">Nouveau post</h1>
-            <p>{{ post.image ? post.image.name : 'Aucun fichier' }}</p>
-
             <div class="rounded-2xl border bg-white shadow-lg post p-4">
                 <Input
                     label="Titre"
@@ -26,16 +24,7 @@
                     text-label="Enregistrer"
                     @click="submitPost"
                 />
-                <Button
-                    text-label="voir la modal"
-                    @click="showModal = true"
-                />
             </div>
-            <Modal id="Test" title="test" v-model="showModal" closable="true">
-                <template #body>
-                    <p>TEst</p>
-                </template>
-            </Modal>
         </div>
     </AppLayout>
 </template>
@@ -47,13 +36,18 @@ import {ref, Ref} from "vue";
 import {CreatePost} from "@/types/post";
 import {api_posts} from "@/api/api_posts";
 import Modal from '@/components/_custom/Modal.vue';
+import {BreadcrumbItem} from "@/types";
+
+const breadcrumbs: BreadcrumbItem[] = [
+    { title: 'Création de post', href: '/create-post' },
+];
+
 
 const post: Ref<CreatePost> = ref({
     title: '',
     content: '',
     image: null,
 });
-const showModal = ref(false);
 
 
 function submitPost() {

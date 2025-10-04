@@ -1,107 +1,85 @@
 <template>
-  <div
-    class="modal modal-custom fade"
-    :data-bs-backdrop="backdrop_static"
-    :id="id"
-    tabindex="-1"
-    aria-hidden="true"
-  >
-    <!--begin::Modal dialog-->
-    <div class="modal-dialog" :class="cssClass">
-      <!--begin::Modal content-->
-      <div class="modal-content">
-        <!--begin::Modal header-->
-        <div class="modal-header">
-          <slot name="header" :title="title">
-            <h3>{{ title }}</h3>
-            <div
-              class="modal-close p-0"
-              data-bs-dismiss="modal"
-              @click="dismiss"
-            >
-              <span class="svg-icon">
-                <inline-svg src="/media/icons/duotune/general/gen034.svg" />
-              </span>
-            </div>
-          </slot>
+    <!-- Overlay -->
+    <transition name="fade">
+        <div
+            v-if="modelValue"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+            @click.self="closable && close()"
+        >
+            <!-- Conteneur de la modale -->
+            <transition name="scale">
+                <div
+                    v-if="modelValue"
+                    class="bg-white rounded-2xl shadow-xl w-full mx-4"
+                    style="max-width: 900px;"
+                >
+                    <!-- Header -->
+                    <div v-if="title || $slots.header" class="flex items-center justify-between border-b p-4">
+                        <slot name="header">
+                            <h3 class="text-lg font-semibold">{{ title }}</h3>
+                            <button
+                                v-if="closable"
+                                @click="close"
+                                class="text-gray-400 hover:text-gray-600"
+                            >
+                                ✕
+                            </button>
+                        </slot>
+                    </div>
+
+                    <!-- Body -->
+                    <div :class="{'p-4': !disableBodyClass}">
+                        <slot name="body"></slot>
+                    </div>
+
+                    <!-- Footer -->
+                    <div
+                        v-if="$slots.footer"
+                        class="flex justify-end gap-2 border-t p-4 bg-gray-50 rounded-b-2xl"
+                    >
+                        <slot name="footer"></slot>
+                    </div>
+                </div>
+            </transition>
         </div>
-        <!--end::Modal header-->
-        <!--begin::Modal body-->
-        <div class="modal-body scroll-y d-flex">
-          <slot name="body"></slot>
-        </div>
-        <!--end::Modal body-->
-        <!--begin::Modal footer-->
-        <div class="modal-footer">
-          <slot name="footer"></slot>
-        </div>
-        <!--end::Modal footer-->
-      </div>
-      <!--end::Modal content-->
-    </div>
-    <!--end::Modal dialog-->
-  </div>
+    </transition>
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, watch } from "vue";
-import { Modal } from "bootstrap";
-
 const props = defineProps({
-  title: String,
-  closable: { default: true },
-  id: { type: String, required: true },
-  modelValue: { required: true },
-  cssClass: { type: String, default: "modal-dialog-centered mw-950px" },
+    modelValue: { type: Boolean, required: true },
+    title: { type: String, default: "" },
+    closable: { type: Boolean, default: true },
+    disableBodyClass: { type: Boolean, default: false}
 });
 
 const emits = defineEmits(["update:modelValue", "hidden"]);
 
-let modal: Modal | undefined = undefined;
-let element: HTMLElement | null = null;
-
-watch(
-  () => props.modelValue,
-  (newVal, oldValue) => {
-    if (!oldValue && newVal) {
-      modal!.show();
-    }
-    if (!newVal && oldValue) {
-      modal!.hide();
-    }
-  }
-);
-
-const backdrop_static = computed(() => {
-  return props.closable ? true : "static";
-});
-
-onMounted(() => {
-  nextTick(() => {
-    element = document.getElementById(props.id);
-    if (element) {
-      modal = new Modal(element, {
-        keyboard: false,
-      });
-      element.addEventListener("hide.bs.modal", dismiss);
-      element.addEventListener("hidden.bs.modal", dismissed);
-    }
-  });
-});
-
-onUnmounted(() => {
-  if (element) {
-    element.removeEventListener("hide.bs.modal", dismiss);
-    element.removeEventListener("hide.bs.modal", dismissed);
-  }
-});
-
-function dismiss() {
-  emits("update:modelValue", false);
-}
-function dismissed() {
-  emits("hidden");
+function close() {
+    emits("update:modelValue", false);
+    setTimeout(() => emits("hidden"), 200); // délai pour la transition
 }
 </script>
 
-<style scoped></style>
+<style>
+/* Transition du fond */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+/* Transition d’apparition de la modale */
+.scale-enter-active,
+.scale-leave-active {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.scale-enter-from,
+.scale-leave-to {
+    transform: scale(0.95);
+    opacity: 0;
+}
+</style>
