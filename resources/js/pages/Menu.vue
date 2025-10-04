@@ -7,7 +7,7 @@
                 <img
                     :src="imageMenu"
                     alt="Menu de la semaine"
-                    class="max-h-[85vh] w-auto object-contain rounded-2xl shadow-lg"
+                    class="max-h-[85vh] max-w-[90vw] object-contain rounded-2xl shadow-lg"
                 />
             </div>
         </div>
