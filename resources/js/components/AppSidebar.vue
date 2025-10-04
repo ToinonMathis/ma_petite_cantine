@@ -40,7 +40,7 @@ const footerNavItems: NavItem[] = [
         <SidebarContent>
             <NavMain :items="mainNavItems" />
         </SidebarContent>
-        <SidebarContent v-if="page.props.auth.user.is_admin === 1">
+        <SidebarContent v-if="page.props.auth.user.is_admin">
             <NavMain :items="adminNavItems" />
         </SidebarContent>
 
