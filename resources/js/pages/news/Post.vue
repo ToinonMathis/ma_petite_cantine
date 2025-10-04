@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded-2xl border bg-white shadow-lg post" v-if="props.post">
+    <div class="rounded-2xl border bg-white shadow-lg post max-w-[400px]" v-if="props.post">
         <!-- Header -->
         <div class="p-2 flex items-center gap-2">
             <div class="rounded-full w-7 h-7 bg-primary flex items-center justify-center">

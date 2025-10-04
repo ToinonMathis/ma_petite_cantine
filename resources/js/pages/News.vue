@@ -3,12 +3,13 @@
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4" v-if="posts.length > 0">
-            <h1 class="mb-10 text-center text-2xl font-bold text-primary">Posts</h1>
-            <div class="flex flex-col items-center gap-10" v-for="post in posts">
-                <PostComponent
-                    :post="post"
-                    @like="like"
-                />
+            <div class="flex flex-col items-center gap-10">
+                <template v-for="post in posts">
+                    <PostComponent
+                        :post="post"
+                        @like="like"
+                    />
+                </template>
             </div>
         </div>
     </AppLayout>
