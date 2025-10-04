@@ -51,4 +51,9 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+
 }
