@@ -2,27 +2,13 @@
     <Head title="Menu" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
-            <div class="flex flex-wrap justify-center gap-8">
-                <img :src="imageMenu" alt="Menu de la semaine">
-                <div
-                    v-for="dayMenu in weekMenu"
-                    :key="dayMenu.id"
-                    class="w-full sm:w-[45%] md:w-[40%] lg:w-[25%] flex flex-col rounded-2xl shadow-md p-4 bg-white border hover:shadow-xl transition p-5"
-                    :class="isToday(dayMenu.menu_date) ? 'border-blue-500 bg-blue-50' : 'border-gray-200'"
-                >
-                    <!-- Header du jour -->
-                    <h3 class="text-lg font-semibold text-center mb-10 text-primary">
-                        {{ formatDate(dayMenu.menu_date) }}
-                    </h3>
-                    <!-- Contenu -->
-                    <div class="flex flex-col text-base divide-y divide-gray-200">
-                        <p class="py-2"><span class="font-medium"><font-awesome-icon icon="leaf" class="text-primary" /> Entrée :</span> {{ dayMenu.starter }}</p>
-                        <p class="py-2"><span class="font-medium"><font-awesome-icon icon="utensils" class="text-primary" /> Plat :</span> {{ dayMenu.main_course }}</p>
-                        <p class="py-2"><span class="font-medium"><font-awesome-icon icon="cheese" class="text-primary" /> Laitier :</span> {{ dayMenu.dairy }}</p>
-                        <p class="py-2"><span class="font-medium"><font-awesome-icon icon="cake" class="text-primary" /> Dessert :</span> {{ dayMenu.dessert }}</p>
-                    </div>
-                </div>
+        <div class="flex flex-1 flex-col rounded-xl overflow-x-auto">
+            <div class="flex justify-center items-center">
+                <img
+                    :src="imageMenu"
+                    alt="Menu de la semaine"
+                    class="max-h-[85vh] w-auto object-contain rounded-2xl shadow-lg"
+                />
             </div>
         </div>
     </AppLayout>
